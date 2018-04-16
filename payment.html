@@ -1,0 +1,99 @@
+<html>
+<head><title>Payment</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+ body{
+  background: green;
+}
+form{
+  background:#fff;
+  padding:2em;
+  max-width:400px;
+  margin:100px auto 0;
+}
+
+input{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  outline:none;
+}
+input{
+  padding:15px 20px;
+  width:100%;
+  background:#e6e6e6;
+  border:#fff;
+}
+input:focus{
+  background:#fff;
+  border-bottom:1px solid #222;
+}
+input::-webkit-input-placeholder{
+  text-align:center;
+  text-transform:uppercase;
+}
+p{
+  position:relative;
+}
+
+button{
+  width:100%;
+  padding:20px 10px;
+  border:none;
+  background: green;
+  color:#fff;
+  font-weight:bolder;
+  cursor:pointer;
+}
+
+</style>
+
+</head>
+<body background="pay.jpg" style = "background-size: 100% 100%;">
+<script>
+function validatePayment(){
+ var flag = 1;	
+ var vcredit = document.myform.credit.value;
+ var vdate = document.myform.expirydate.value;
+ var vphno = document.myform.phno.value;
+
+ if(vcredit == "" || vdate == "" || vphno == ""){
+  alert("Details cannot be empty");
+  flag = 0;
+ }
+ else if(vphno.length != 10){
+   alert("Enter 10 digit phone number");
+   flag = 0;
+ }
+ else if(!vphno.match(/^[0-9]{10}$/)){
+   alert("Enter correct format of phone number");
+   flag = 0;
+}
+else if(!vcredit.match(/^[0-9]{16}$/)){
+   alert("Enter correct format of credit card number");
+   flag = 0;
+}
+if(flag == 0){
+ document.myform.focus();
+}
+else{
+ window.location = "home.php";
+}
+
+}
+</script>	
+    <center>
+    <font color="white"><h1>Payment Portal</h1></font>   
+    <form name= "myform">
+       <p><input type ="radio" name = "type">VISA
+       <input type ="radio" name="type">Maestro</p>
+       <p><input type="text"  name="credit" placeholder="Credit Card Number"></p>
+       <p><input type="text"  name="expirydate" placeholder="Expiry Date" onfocus="(this.type='date')" onblur="(this.type='text')" ></p>
+       <p><input type="text"  name="phno" placeholder="Phone Number"></p>
+      <p><button type="button" onClick="validatePayment()">PAY</button></p>
+       <p><input type="button" onclick="location.href='home.php';" value="HOME"></p>
+    </form>
+   </center>
+</body>
+</html>
